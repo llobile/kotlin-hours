@@ -1,4 +1,4 @@
-package uk.co.lloydsbanking.kotlin.hours.stdlib
+package uk.co.llobile.kotlin.hours.stdlib
 
 /**
  * The let signature is:
