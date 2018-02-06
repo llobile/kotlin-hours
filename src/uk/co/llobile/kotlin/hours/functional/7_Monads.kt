@@ -27,8 +27,8 @@ fun main(args : Array<String>) {
     // funcWithListReturn(listInt)
 
     // Fully functional approach (not supported in Kotlin):
-    // optionalInt.lift(funcWithOptionalReturn)
-    // listInt.lift(funcWithListReturn)
+    // optionalInt.flatMap(funcWithOptionalReturn)
+    // listInt.flatMap(funcWithListReturn)
 
     // Kotlin solution:
     val result: Int? = optionalInt?.let(funcWithOptionalReturn)
