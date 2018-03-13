@@ -17,12 +17,7 @@ sealed class FunctionalOption<out T>: Functor<T>, Applicative<T>, Monad<T> {
         fn(get()) as FunctionalOption<R>
     }
 
-    override fun <R> join(): FunctionalOption<R> = emptyOrFunction {
-        when (get()) {
-            is FunctionalOption<*> -> (get() as FunctionalOption<R>).join()
-            else -> Some(get()) as FunctionalOption<R>
-        }
-    }
+    override fun <R> unit(value: R): FunctionalOption<R> = Some(value)
 
     private fun <R> emptyOrFunction(fn: () -> FunctionalOption<R>) = when (isEmpty()) {
         true -> None
@@ -74,14 +69,8 @@ fun main(args : Array<String>) {
     println(none.flatMap(addOpt))
     println()
 
-    println("Monad operation - join")
-    val nestedSome: FunctionalOption<FunctionalOption<Int>> = Some(Some(1))
-    val deepNestedSome: FunctionalOption<FunctionalOption<FunctionalOption<FunctionalOption<Int>>>> = Some(Some(Some(Some(2))))
-    val nestedNone: FunctionalOption<FunctionalOption<Int>> = Some(None)
-    val deepNestedNone: FunctionalOption<FunctionalOption<FunctionalOption<FunctionalOption<Int>>>> = Some(Some(None))
-    println(nestedSome.join<Int>())
-    println(deepNestedSome.join<Int>())
-    println(nestedNone.join<Int>())
-    println(deepNestedNone.join<Int>())
+    println("Monad operation - unit")
+    println(some.unit(1))
+    println(none.unit("anything"))
     println()
 }

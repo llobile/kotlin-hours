@@ -6,5 +6,5 @@ package uk.co.llobile.kotlin.hours.types
 interface Monad<out T> {
     fun <R> flatMap(fn: (T) -> Monad<R>): Monad<R>
 
-    fun <R> join(): Monad<R>
+    fun <R> unit(value: R): Monad<R>
 }
